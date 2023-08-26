@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        this is a reimplementation of <a href="https://12tet.umm.gay/" target="_blank">this site</a>
+        <br/><br/>
+
+        A4: <input type="number" name="a4" value="440" />
+        <br/>
+        <input type="string" name="note" value="" />
+        is <input type="number" name="freq" value="880" />
+        <br/>
+        double: <input type="string" name="double" value="0" />
+
+
+        <script src="/teoria.js"></script>
+        <script src="/dag.js"></script>
+        <script>
+            const cells = {
+                a4: null,
+                note: c => teoria.note.fromFrequency(+c.freq).note.scientific(),
+                freq: c => teoria.note.fromString(c.note).fq(+c.a4).toFixed(2),
+                double: c => c.freq * 2,
+            };
+
+            setupDag(cells);
+        </script>
+    </body>
+</html>

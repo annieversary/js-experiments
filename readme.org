@@ -1,0 +1,25 @@
+* js experiments
+this is a collection of small js library experiments which i haven't bothered to build out into a full library.
+feel free to look around but i don't recommend using any of these in production, there's been basically no testing
+
+if i ever have an excuse to use any of these in a project, ill probably improve them and release them as a standalone thing
+
+** what is there
+*** dag-test
+"spreadsheet-like" builder.
+used to write those kinds of websites that could be easily replaced by a spreadsheet.
+look at [[./dag-test/index.html]] for an example
+*** test-proxy
+i like vanilla js but i dont like having to write things like
+#+begin_src js
+const h1s = document.querySelectorAll('h1');
+for (const el of [...h1s]) {
+    el.style.color = 'red';
+}
+#+end_src
+with this, you can just write
+#+begin_src js
+m('h1').style.color = 'red'
+m('h1').addEventListener('click', function () { console.log(this.innerHTML) })
+#+end_src
+and it'll apply to all the =h1= elements in the page

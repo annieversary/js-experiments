@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <style>
+            body {
+                background: #ffe8f4;
+
+                font-family: sans-serif;
+            }
+
+            #list {
+                display: flex;
+                flex-direction: column;
+
+                margin-top: 1rem;
+            }
+
+            body:has(input[value="1"]:checked) {
+                --factor: 1;
+            }
+            body:has(input[value="2"]:checked) {
+                --factor: 2;
+            }
+            body:has(input[value="3"]:checked) {
+                --factor: 3;
+            }
+            body:has(input[value="5"]:checked) {
+                --factor: 5;
+            }
+            body:has(input[value="7"]:checked) {
+                --factor: 7;
+            }
+
+            #buttons {
+                display: flex;
+                flex-direction: row;
+                gap: 1rem;
+            }
+
+            #buttons input {
+                display: none;
+            }
+            #buttons label {
+                cursor: pointer;
+                text-align: center;
+
+                padding: 0.5rem 1rem;
+
+                color: #8c1d76;
+                border: 1px solid #8c1d76;
+                border-radius: 0.8rem;
+
+                transition: background-color 200ms, color 200ms 200ms;
+            }
+            #buttons label:has(input:checked) {
+                background-color: #8c1d76;
+                color: #ffe8f4;
+
+                transition: background-color 200ms, color 200ms;
+            }
+
+            .number[data-number] {
+                --hash: mod(calc(var(--number) * 673), 20);
+
+                --duration: 700ms;
+                --seq-duration: calc(200ms + ((var(--number) / 10) * 400ms));
+                --rand-duration: calc((var(--hash) / 10) * 700ms);
+
+                --mod: mod(var(--number), var(--factor));
+                --not-factor: clamp(0, var(--mod), 1);
+                --is-factor: calc(1 - var(--not-factor));
+
+                color: #8c1d76;
+                border-radius: 4px;
+
+                background-color: #ffd2e9;
+                overflow: hidden;
+                border-style: solid;
+                border-width: 0;
+
+                width: calc(var(--is-factor) * 100%);
+                height: calc(var(--is-factor) * (2rem - 2px));
+                margin-top: calc(var(--is-factor) * 5px);
+
+                transition:
+                    margin-top
+                        calc(var(--duration))
+                        calc(var(--is-factor) * var(--duration) / 3),
+                    width
+                        calc(var(--not-factor) * var(--rand-duration) * 0.5),
+                    height
+                        var(--rand-duration)
+                        calc(var(--is-factor) * var(--seq-duration))
+                ;
+            }
+
+            .number[data-number]:first-child {
+                margin-top: 0;
+            }
+
+            .number > div {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                margin-left: calc(var(--is-factor) * var(--number) * 1rem);
+
+                height: calc(var(--is-factor) * (2rem - 2px));
+
+                transition:
+                    height
+                        var(--duration)
+                        calc(var(--not-factor) * var(--duration)),
+                    margin-left
+                        var(--rand-duration)
+                ;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="buttons">
+            <label>
+                1
+                <input type="radio" name="factor" value="1" checked />
+            </label>
+            <label>
+                2
+                <input type="radio" name="factor" value="2" />
+            </label>
+            <label>
+                3
+                <input type="radio" name="factor" value="3" />
+            </label>
+            <label>
+                5
+                <input type="radio" name="factor" value="5" />
+            </label>
+            <label>
+                7
+                <input type="radio" name="factor" value="7" />
+            </label>
+        </div>
+
+        <div id="list" class="list">
+            <div class="number" data-number="1" style="--number: 1"><div><p>1</p></div></div><div class="number" data-number="2" style="--number: 2"><div><p>2</p></div></div><div class="number" data-number="3" style="--number: 3"><div><p>3</p></div></div><div class="number" data-number="4" style="--number: 4"><div><p>4</p></div></div><div class="number" data-number="5" style="--number: 5"><div><p>5</p></div></div><div class="number" data-number="6" style="--number: 6"><div><p>6</p></div></div><div class="number" data-number="7" style="--number: 7"><div><p>7</p></div></div><div class="number" data-number="8" style="--number: 8"><div><p>8</p></div></div><div class="number" data-number="9" style="--number: 9"><div><p>9</p></div></div><div class="number" data-number="10" style="--number: 10"><div><p>10</p></div></div><div class="number" data-number="11" style="--number: 11"><div><p>11</p></div></div><div class="number" data-number="12" style="--number: 12"><div><p>12</p></div></div><div class="number" data-number="13" style="--number: 13"><div><p>13</p></div></div><div class="number" data-number="14" style="--number: 14"><div><p>14</p></div></div><div class="number" data-number="15" style="--number: 15"><div><p>15</p></div></div><div class="number" data-number="16" style="--number: 16"><div><p>16</p></div></div><div class="number" data-number="17" style="--number: 17"><div><p>17</p></div></div><div class="number" data-number="18" style="--number: 18"><div><p>18</p></div></div><div class="number" data-number="19" style="--number: 19"><div><p>19</p></div></div>
+        </div>
+
+        <script>
+            /* window.list.innerHTML = Array.from(Array(20).keys())
+             *                              .map(i => `<div class="number" data-number="${i}" style="--number: ${i}"><div><p>${i}</p></div></div>`)
+             *                              .join('');
+             */
+        </script>
+    </body>
+</html>

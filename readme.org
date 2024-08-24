@@ -23,3 +23,6 @@ m('h1').style.color = 'red'
 m('h1').addEventListener('click', function () { console.log(this.innerHTML) })
 #+end_src
 and it'll apply to all the =h1= elements in the page
+*** animated-list
+this was going to be a js thing but ended up being pure css.
+it's just a list of numbers that can be filtered by divisors.
